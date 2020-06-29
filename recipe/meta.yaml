@@ -1,0 +1,33 @@
+{% set name = "logging_tree" %}
+{% set version = "1.8.1" %}
+{% set sha256 = "c2201ab13be5060bf6f0cf29d18516d9f1d9186c75913ffda2165a01d1c63f81" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}  
+
+build:
+  number: 0
+  noarch: python
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+
+test:
+  imports:
+    - logging_tree
+
+about:
+  home: https://github.com/brandon-rhodes/logging_tree
+  license: BSD License
+  license_file: COPYRIGHT
+  summary: Introspect and display the logger tree inside "logging"
